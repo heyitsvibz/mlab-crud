@@ -1,0 +1,123 @@
+<!-- home.html -->
+<div class="row" style="margin: 8px ">
+    <span style="font-size: 22px ">DATABASE : </span>
+    <button type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="#myModal">+ Create</button>
+</div>
+<table id="myTable" class="table table-condensed">
+    <thead>
+        <tr class="info">
+            <th>Name</th>
+            <th>Cell</th>
+            <th>Location</th>
+            <th>PIN code</th>
+            <th>Status</th>
+            <th>edit</th>
+        </tr>
+        <tr ng-repeat="val in myobj | filter:searchText">
+            <form>
+                <th>{{val.Name}}</th>
+                <th>{{val.Cell}}</th>
+                <th>{{val.Location}}</th>
+                <th>{{val.PINcode}}</th>
+                <th>{{val.Status}}</th>
+                <th><a href="#" id="{{val._id.$oid}}" ng-click='boot(val)' data-toggle="modal" data-target="#myModal2">EDIT</a></th>
+            </form>
+            <!--<span class="glyphicon glyphicon-minus"></span> <a href="#" id="edit" ng-click='check()' ng-attr-src={{val._id.$oid}} ><span class="glyphicon glyphicon-random"></span></a> -->
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+<!-- <input id="qaz" disabled="Auto"></input> -->
+<!-- Modal for edit func-->
+<div class="modal fade" id="myModal2" role="dialog">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Edit Data</h4>
+            </div>
+            <div class="modal-body">
+                <!-- data -->
+                <form class="form" role="form">
+                    <div class="row">
+                        <div class="form-group">
+                            <label>Entry #</label>
+                            <input type="text" class="form-control " ng-model="eid" disabled="Auto">
+                        </div>
+                        <div class="form-group">
+                            <label>Name</label>
+                            <input type="text" class="form-control" ng-model="ename">
+                        </div>
+                        <div class="form-group">
+                            <label>Cell</label>
+                            <input type="text" class="form-control" ng-model="ecell" required="required">
+                        </div>
+                        <div class="form-group">
+                            <label>Location</label>
+                            <input type="text" class="form-control" ng-model="elocation" required="required">
+                        </div>
+                        <div class="form-group">
+                            <label>Pin Code</label>
+                            <input type="text" class="form-control" ng-model="ePINCode" required="required">
+                        </div>
+                    </div>
+                    <!-- form-group ends-->
+                </form>
+                <!-- data end -->
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-danger " ng-click='delete(eid)'>Delete</button>
+                <button class="btn btn-success " ng-click='update(eid)'>Update</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<!-- Modal for create func-->
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Enter Data</h4>
+            </div>
+            <div class="modal-body">
+                <!-- data -->
+                <form class="form" role="form">
+                    <div class="row">
+                        <div class="form-group">
+                            <label>Entry #</label>
+                            <input type="text" class="form-control uid" disabled="Auto">
+                        </div>
+                        <div class="form-group">
+                            <label>Name</label>
+                            <input type="text" class="form-control" ng-model="name" required="required" autofocus="true">
+                        </div>
+                        <div class="form-group">
+                            <label>Cell</label>
+                            <input type="text" class="form-control" ng-model="cell" placeholder="Cell" required="required">
+                        </div>
+                        <div class="form-group">
+                            <label>Location</label>
+                            <input type="text" class="form-control" ng-model="location" placeholder="Location" required="required">
+                        </div>
+                        <div class="form-group">
+                            <label>Pin Code</label>
+                            <input type="text" class="form-control" ng-model="PINCode" placeholder="PIN COde" required="required">
+                        </div>
+                    </div>
+                    <!-- form-group ends-->
+                </form>
+                <!-- data end -->
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-success " ng-click='create()'>Create</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal -->

@@ -1,0 +1,34 @@
+<div id="map" style="height: 580px; margin-top: 10px 0px 10px 0px "></div>
+<script>
+var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 11,
+    center: new google.maps.LatLng(28.6139, 77.2090),
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+});
+var infowindow = new google.maps.InfoWindow();
+var marker, i, j, k;
+
+$.getJSON('location_file.json', function(data) {
+    var locations = [];
+    for (var i in data) {
+        locations.push([data[i].name, data[i].longi, data[i].lat]);
+    }
+    console.log(locations);
+
+
+    for (i = 0; i < locations.length; i++) {
+        marker = new google.maps.Marker({
+            position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+            map: map,
+            animation: google.maps.Animation.DROP
+        });
+
+        google.maps.event.addListener(marker, 'click', (function(marker, i) {
+            return function() {
+                infowindow.setContent(locations[i][0]);
+                infowindow.open(map, marker);
+            }
+        })(marker, i));
+    }
+});
+</script>
